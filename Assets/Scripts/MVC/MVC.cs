@@ -1,0 +1,76 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public static class MVC
+{
+    public static Dictionary<string, Model> Models = new Dictionary<string, Model>();
+    public static Dictionary<string, View> Views = new Dictionary<string, View>();
+    public static Dictionary<EventType, Type> CommandMap = new Dictionary<EventType, Type>();
+
+    //注册
+    public static void RegisterModel(Model model)
+    {
+        if (Models.ContainsKey(model.Name))
+        {
+            Debug.LogError("模型层重复注册:" + model.Name);
+            return;
+        }
+        Models.Add(model.Name, model);
+    }
+
+    public static void RegisterView(View view)
+    {
+        if (Views.ContainsKey(view.name))
+        {
+            Debug.LogError("视图层重复注册:" + view.Name);
+            return;
+        }
+        Views.Add(view.Name, view);
+    }
+
+    public static void RegisterController(EventType eventType ,Type controllerType)
+    {
+        if (CommandMap.ContainsKey(eventType))
+        {
+            Debug.LogError("控制器重复注册：" + eventType);
+            return;
+        }
+        CommandMap.Add(eventType, controllerType);
+    }
+
+    //获取
+    public static T GetModel<T>(string name) where T : Model
+    {
+        Model model = null;
+        Models.TryGetValue(name, out model);
+        return model as T;
+    }
+
+    public static T GetView<T>(string name) where T : View
+    {
+        View view = null;
+        Views.TryGetValue(name, out view);
+        return view as T;
+    }
+
+    //发送执行函数
+    public static void SendEvent(EventType eventType,MEventArgs eventArgs)
+    {
+        if (CommandMap.ContainsKey(eventType))
+        {
+            Type t = CommandMap[eventType];
+            Controller c = Activator.CreateInstance(t) as Controller;
+            //控制器执行
+            c.Excute(eventArgs);
+        }
+
+        foreach (View v in Views.Values)
+        {
+            if (v.attentionEvents.Contains(eventType)){
+                v.HandleEvent(eventType,eventArgs);
+            }
+        }
+    }
+}
