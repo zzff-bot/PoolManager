@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+  <book category="fiction">
+    <title lang="en">The Hobbit</title>
+    <author>J.R.R Tolkien</author>
+    <year>1937</year>
+    <price>12.99</price>
+  </book>
+  <book category="non-fiction">
+    <title lang="es">Cien anos de soledad</title>
+    <author>Gabriel Garcia Marquez</author>
+    <author>1967</author>
+    <price>15.50</price>
+  </book>
+</bookstore>
