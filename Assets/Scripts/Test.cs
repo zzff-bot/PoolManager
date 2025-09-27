@@ -16,7 +16,9 @@ public class Test : MonoBehaviour
     private void Start()
     {
         //TestXML();
-        TestXMLLoad();
+        //TestXMLLoad();
+        Level level = new Level();
+        Utils.LoadLevel("level0.xml", ref level);
     }
 
     void TestXMLLoad()
