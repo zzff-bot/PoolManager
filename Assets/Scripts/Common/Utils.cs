@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
+using UnityEngine.Networking;
 
 //GmaeUtils,StringUtils,TimeUtils...
-public static class Utils
+public class Utils
 {
     //加载配置表文件，解析内容，输出对应的Level对象
     public static void LoadLevel(string path,ref Level level)
@@ -50,6 +51,22 @@ public static class Utils
                 int.Parse(node.Attributes["Count"].Value)
                 );
             level.Rounds.Add(round);
+        }
+    }
+
+    public static IEnumerator LoadImageAsync(string path,SpriteRenderer sr)
+    {
+        //WWW好用，性能颗粒化很多，有很多额外性能的消耗
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(path);  //新建一个加载请求
+        yield return request.SendWebRequest();  //直到请求结束，往下加载
+
+        //执行到这里，就证明加载结束
+        if (request.isDone)
+        {
+            //isDone==true，资源加载成功
+            Texture2D texture = DownloadHandlerTexture.GetContent(request);
+            Sprite sprite = Sprite.Create(texture, new Rect(new Vector2(0, 0), new Vector2(texture.width, texture.height)), Vector2.zero);
+            sr.sprite = sprite;
         }
     }
 }
