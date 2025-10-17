@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Level>
+	<Name>第二关</Name>
+	<CardImage>Level_2.png</CardImage>
+	<Background>BG1.png</Background>
+	<Road>Road3.png</Road>
+	<InitScore>20</InitScore>
+	<Holder>
+		<Point X = "1" Y = "6" />
+		<Point X = "2" Y = "2" />
+		<Point X = "2" Y = "3" />
+		<Point X = "2" Y = "4" />
+		<Point X = "2" Y = "6" />
+		<Point X = "2" Y = "7" />
+		<Point X = "3" Y = "4" />
+		<Point X = "3" Y = "8" />
+		<Point X = "3" Y = "9" />
+		<Point X = "4" Y = "4" />
+		<Point X = "4" Y = "5" />
+		<Point X = "4" Y = "6" />
+		<Point X = "5" Y = "6" />
+		<Point X = "5" Y = "9" />
+		<Point X = "6" Y = "7" />
+		<Point X = "6" Y = "8" />
+	</Holder>
+	<Path>
+		<Point X = "4" Y = "1" />
+		<Point X = "1" Y = "1" />
+		<Point X = "1" Y = "5" />
+		<Point X = "3" Y = "5" />
+		<Point X = "3" Y = "7" />
+		<Point X = "5" Y = "7" />
+		<Point X = "5" Y = "8" />
+		<Point X = "4" Y = "8" />
+		<Point X = "4" Y = "10" />
+	</Path>
+	<Rounds>
+		<Round Monster="1" Count="2" />
+		<Round Monster="1" Count="3" />
+		<Round Monster="1" Count="5" />
+	</Rounds>
+</Level>

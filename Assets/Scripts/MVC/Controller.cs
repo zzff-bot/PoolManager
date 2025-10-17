@@ -10,7 +10,7 @@ public abstract class Controller
         return MVC.GetModel<T>(name);
     }
 
-    public T GetView<T>(string name) where T: View
+    public T GetView<T>(MViewName name) where T: View
     {
         return MVC.GetView<T>(name);
     }
@@ -25,7 +25,7 @@ public abstract class Controller
         MVC.RegisterView(view);
     }
 
-    public void RegisterController(EventType eventType,Type controllerType)
+    public void RegisterController(MEventType eventType,Type controllerType)
     {
         MVC.RegisterController(eventType, controllerType);
     }

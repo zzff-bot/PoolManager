@@ -6,8 +6,8 @@ using System;
 public static class MVC
 {
     public static Dictionary<string, Model> Models = new Dictionary<string, Model>();
-    public static Dictionary<string, View> Views = new Dictionary<string, View>();
-    public static Dictionary<EventType, Type> CommandMap = new Dictionary<EventType, Type>();
+    public static Dictionary<MViewName, View> Views = new Dictionary<MViewName, View>();
+    public static Dictionary<MEventType, Type> CommandMap = new Dictionary<MEventType, Type>();
 
     //×¢²á
     public static void RegisterModel(Model model)
@@ -22,7 +22,7 @@ public static class MVC
 
     public static void RegisterView(View view)
     {
-        if (Views.ContainsKey(view.name))
+        if (Views.ContainsKey(view.Name))
         {
             Debug.LogError("ÊÓÍ¼²ãÖØ¸´×¢²á:" + view.Name);
             return;
@@ -30,7 +30,12 @@ public static class MVC
         Views.Add(view.Name, view);
     }
 
-    public static void RegisterController(EventType eventType ,Type controllerType)
+    public static void UnRegisterView(View view)
+    {
+
+    }
+
+    public static void RegisterController(MEventType eventType ,Type controllerType)
     {
         if (CommandMap.ContainsKey(eventType))
         {
@@ -48,7 +53,7 @@ public static class MVC
         return model as T;
     }
 
-    public static T GetView<T>(string name) where T : View
+    public static T GetView<T>(MViewName name) where T : View
     {
         View view = null;
         Views.TryGetValue(name, out view);
@@ -56,7 +61,7 @@ public static class MVC
     }
 
     //·¢ËÍÖ´ÐÐº¯Êý
-    public static void SendEvent(EventType eventType,MEventArgs eventArgs)
+    public static void SendEvent(MEventType eventType,MEventArgs eventArgs)
     {
         if (CommandMap.ContainsKey(eventType))
         {

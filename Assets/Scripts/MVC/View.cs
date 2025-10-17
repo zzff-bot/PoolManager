@@ -2,20 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MViewName
+{
+    StartView,
+    SelectView,
+}
+
+//视图层什么时候注册到MVC里面
 public abstract class View : MonoBehaviour
 {
-    public abstract string Name { get; }
+    public abstract MViewName Name { get; }
 
     //视图层需要关注的事件类型
-    public List<EventType> attentionEvents = new List<EventType>();
+     [HideInInspector] public List<MEventType> attentionEvents = new List<MEventType>();
 
-    protected void RegisterEvent(EventType eventType)
+    protected void RegisterEvent(MEventType eventType)
     {
         if (ContainEventType(eventType)) return;
         attentionEvents.Add(eventType);
     }
 
-    protected void UnregisterEvent(EventType eventType)
+    protected void UnregisterEvent(MEventType eventType)
     {
         if (!ContainEventType(eventType)) return;
         attentionEvents.Remove(eventType);
@@ -26,7 +33,7 @@ public abstract class View : MonoBehaviour
         attentionEvents.Clear();
     }
     
-    public bool ContainEventType(EventType eventType)
+    public bool ContainEventType(MEventType eventType)
     {
         return attentionEvents.Contains(eventType);
     }
@@ -37,11 +44,24 @@ public abstract class View : MonoBehaviour
         return MVC.GetModel<T>(name);
     }
 
-    protected void SendEvent(EventType eventType, MEventArgs eventArgs)
+    protected void SendEvent(MEventType eventType, MEventArgs eventArgs)
     {
         //MVC发送
         MVC.SendEvent(eventType, eventArgs);
     }
 
-    public abstract void HandleEvent(EventType eventType, MEventArgs eventArgs);
+    public abstract void HandleEvent(MEventType eventType, MEventArgs eventArgs);
+
+    protected virtual void Start()
+    {
+        MVC.RegisterView(this);
+        Initialize();
+    }
+
+    protected virtual void OnDestroy()
+    {
+        MVC.UnRegisterView(this);
+    }
+
+    protected virtual void Initialize() { }
 }

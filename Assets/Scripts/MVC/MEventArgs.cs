@@ -4,5 +4,31 @@ using UnityEngine;
 
 public class MEventArgs
 {
+    
+}
 
+public class MSceneArgs : MEventArgs
+{
+    public int sceneIdx;
+    public string sceneName;
+
+    public MSceneArgs() { }
+
+    public MSceneArgs(int sceneIdx,string sceneName)
+    {
+        this.sceneIdx = sceneIdx;
+        this.sceneName = sceneName;
+    }
+}
+
+public class MLevelArgs : MEventArgs
+{
+    public int LevelIdx;
+    public bool IsSuccess;
+
+    public MLevelArgs(int levelIdx,bool isSuccess)
+    {
+        LevelIdx = levelIdx;
+        IsSuccess = isSuccess;
+    }
 }
