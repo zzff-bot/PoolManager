@@ -126,7 +126,7 @@ public class Map : MonoBehaviour
     public void SetBackground(string fileName)
     {
         //动态加载贴图
-        GameObject go = GameObject.Find("Background");   
+        GameObject go = transform.Find("Background").gameObject;   
         if (go == null)
         {
             Debug.LogError("找不到关卡背景对象");
@@ -140,7 +140,7 @@ public class Map : MonoBehaviour
     public void SetRoad(string fileName)
     {
         //动态加载
-        GameObject go = GameObject.Find("Road");
+        GameObject go = transform.Find("Road").gameObject;
         if (go == null)
         {
             Debug.LogError("找不到路径对象");
