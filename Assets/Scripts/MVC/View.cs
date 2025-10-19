@@ -6,6 +6,11 @@ public enum MViewName
 {
     StartView,
     SelectView,
+    MenuVIew,
+    CountDownView,
+    AccountSuccessView,
+    AccountFailureView,
+    SystemView,
 }
 
 //视图层什么时候注册到MVC里面
@@ -44,6 +49,11 @@ public abstract class View : MonoBehaviour
         return MVC.GetModel<T>(name);
     }
 
+    protected T GetView<T>(MViewName name) where T : View
+    {
+        return MVC.GetView<T>(name);
+    }
+
     protected void SendEvent(MEventType eventType, MEventArgs eventArgs)
     {
         //MVC发送
@@ -61,6 +71,11 @@ public abstract class View : MonoBehaviour
     protected virtual void OnDestroy()
     {
         MVC.UnRegisterView(this);
+    }
+
+    public virtual void SetActive(bool isActive)
+    {
+        this.gameObject.SetActive(isActive);
     }
 
     protected virtual void Initialize() { }
