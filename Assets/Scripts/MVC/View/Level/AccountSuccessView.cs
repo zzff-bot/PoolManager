@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class AccountSuccessView : View
 {
-    public override MViewName Name => throw new System.NotImplementedException();
+    public override MViewName Name => MViewName.AccountSuccessView;
 
     public override void HandleEvent(MEventType eventType, MEventArgs eventArgs)
     {
         throw new System.NotImplementedException();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        SetActive(false);
     }
 }

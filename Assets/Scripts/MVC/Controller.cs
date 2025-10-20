@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Controller
 {
-    public T GetModel<T>(string name) where T : Model
+    public T GetModel<T>(MModelName name) where T : Model
     {
         return MVC.GetModel<T>(name);
     }

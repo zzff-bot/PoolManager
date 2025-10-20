@@ -5,7 +5,7 @@ using System;
 
 public static class MVC
 {
-    public static Dictionary<string, Model> Models = new Dictionary<string, Model>();
+    public static Dictionary<MModelName, Model> Models = new Dictionary<MModelName, Model>();
     public static Dictionary<MViewName, View> Views = new Dictionary<MViewName, View>();
     public static Dictionary<MEventType, Type> CommandMap = new Dictionary<MEventType, Type>();
 
@@ -32,7 +32,12 @@ public static class MVC
 
     public static void UnRegisterView(View view)
     {
-
+        if (!Views.ContainsKey(view.Name))
+        {
+            Debug.Log("视图层不存在，不能移除");
+            return;
+        }
+        Views.Remove(view.Name);
     }
 
     public static void RegisterController(MEventType eventType ,Type controllerType)
@@ -46,7 +51,7 @@ public static class MVC
     }
 
     //获取
-    public static T GetModel<T>(string name) where T : Model
+    public static T GetModel<T>(MModelName name) where T : Model
     {
         Model model = null;
         Models.TryGetValue(name, out model);

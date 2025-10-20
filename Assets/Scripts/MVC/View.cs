@@ -43,7 +43,7 @@ public abstract class View : MonoBehaviour
         return attentionEvents.Contains(eventType);
     }
 
-    protected T GetModel<T>(string name) where T : Model
+    protected T GetModel<T>(MModelName name) where T : Model
     {
         //·µ»ØÄ£ÐÍ²ã
         return MVC.GetModel<T>(name);

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SelectView : View
 {
-    private List<Level> levels = new List<Level>();
+    private List<Level> levels;
     private int curIdx = 0;
     private int selectIdx = -1;
 
@@ -88,14 +88,9 @@ public class SelectView : View
 
     private void LoadLevels()
     {
-        List<FileInfo> levelList = Utils.GetAllLevelFiles();
-
-        for (int i = 0; i < levelList.Count; i++)
-        {
-            Level level = new Level();
-            Utils.LoadLevel(levelList[i].Name, ref level);
-            levels.Add(level);
-        }
+        GameModel model = GetModel<GameModel>(MModelName.GameModel);
+        levels = model.Levels;
+        curIdx = model.CurLevelIdx;
     }
 
     private void OnLeftBtnClick()

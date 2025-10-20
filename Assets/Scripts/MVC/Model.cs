@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MModelName
+{
+    GameModel,
+    RoundModel,
+}
+
 public abstract class Model
 {
-    public abstract string Name { get; }
+    public abstract MModelName Name { get; }
 
     //·¢ËÍÏûÏ¢
     public void SendEvent(MEventType eventType,MEventArgs eventArgs)
