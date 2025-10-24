@@ -16,5 +16,6 @@ public abstract class Model
     public void SendEvent(MEventType eventType,MEventArgs eventArgs)
     {
         //MVC调度中心
+        MVC.SendEvent(eventType, eventArgs);
     }
 }

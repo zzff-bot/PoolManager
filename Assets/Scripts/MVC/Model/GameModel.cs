@@ -20,6 +20,9 @@ public class GameModel : Model
     public int Gold { get => this.gold; }
     public bool IsPlaying { get => this.isPlaying; }
     public bool IsGamePass { get => curLevelIdx >= levels.Count; }
+
+    public int LevelCount { get => levels.Count; }  //一共有多少关
+
     public Level CurLevel {
         get
         {
@@ -36,7 +39,7 @@ public class GameModel : Model
     {
         //加载配置表
         List<FileInfo> levelList = Utils.GetAllLevelFiles();
-
+        
         for (int i = 0; i < levelList.Count; i++)
         {
             //内存换速度
@@ -46,6 +49,32 @@ public class GameModel : Model
         }
 
         curLevelIdx = PlayerPresHelpers.GetCurrentIdx();
+    }
+
+    public void StartLevel(int selectIdx)
+    {
+        this.curLevelIdx = selectIdx;
+        isPlaying = true;
+    }
+
+    public void EndLevel(bool isSuccess)
+    {
+        //通过之后要调用这个函数，如果解锁了新的关卡，要保存
+        if(isSuccess && curSelectIdx >= curLevelIdx)
+        {
+            curLevelIdx++;
+            PlayerPresHelpers.SetCurrentLevelIdx(curLevelIdx);
+        }
+        isPlaying = false;
+    }
+
+    //清档
+    public void Clear()
+    {
+        isPlaying = false;
+        curLevelIdx = 0;
+        curSelectIdx = -1;
+        PlayerPresHelpers.SetCurrentLevelIdx(0);
     }
 }
         

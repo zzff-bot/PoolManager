@@ -48,6 +48,9 @@ public class MenuVIew : View
     protected override void Start()
     {
         base.Start();
+
+        RegisterEvent(MEventType.StartRound);
+
         this.Score = 0;
         this.IsPlaying = true;
         this.PlaySpeed = GameSpeed.One;
@@ -98,6 +101,8 @@ public class MenuVIew : View
         txtCurRound = tfRoundInfo.Find("txtCurRound").GetComponent<Text>();
         txtTotalRound = tfRoundInfo.Find("txtTotalRound").GetComponent<Text>();
 
+        
+
         objBtnOne = tfBackground.Find("btnOne").gameObject;
         objBtnOne.GetComponent<Button>().onClick.AddListener(OnOneClick);
 
@@ -115,13 +120,42 @@ public class MenuVIew : View
 
     public override void HandleEvent(MEventType eventType, MEventArgs eventArgs)
     {
+        
+        switch (eventType)
+        {
+            case MEventType.EnterScene:
+                Debug.Log("MenuViewÖÐµÄEnterScence");
+                break;
+            case MEventType.ExitScene:
+                break;
+            case MEventType.StartUp:
+                break;
+            case MEventType.StartLevel:
+                break;
+            case MEventType.EndLevel:
+                break;
+            case MEventType.StartRound:
+                MRoundArgs e = eventArgs as MRoundArgs;
+                OnRoundInfoUpdate(e.CurRoundIdx, e.TotalRound);
+                break;
+            case MEventType.SpawnMonster:
+                break;
+            case MEventType.CountDownComplete:
+                break;
+            default:
+                break;
+        }
+    }
 
+    void OnRoundInfoUpdate(int curRound,int totalRound)
+    {
+        this.CurRound = curRound + 1;
+        this.TotalRound = totalRound;
     }
 
     private void OnOneClick()
     {
         this.PlaySpeed = GameSpeed.Two;
-        
     }
 
     private void OnTwoClick()
@@ -144,5 +178,11 @@ public class MenuVIew : View
         //GetView()
         View systemView = GetView<SystemView>(MViewName.SystemView);
         systemView.SetActive(true);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        UnregisterAll();
     }
 }

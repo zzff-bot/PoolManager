@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Monster
+    uniqueID: 1486592365
+    locked: 0
+  - name: LuoBo
+    uniqueID: 551593113
+    locked: 0

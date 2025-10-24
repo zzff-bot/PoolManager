@@ -11,6 +11,7 @@ public enum MViewName
     AccountSuccessView,
     AccountFailureView,
     SystemView,
+    Spawner,
 }
 
 //视图层什么时候注册到MVC里面
@@ -57,15 +58,21 @@ public abstract class View : MonoBehaviour
     protected void SendEvent(MEventType eventType, MEventArgs eventArgs)
     {
         //MVC发送
+        
         MVC.SendEvent(eventType, eventArgs);
     }
 
     public abstract void HandleEvent(MEventType eventType, MEventArgs eventArgs);
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         MVC.RegisterView(this);
         Initialize();
+    }
+
+    protected virtual void Start()
+    {
+
     }
 
     protected virtual void OnDestroy()

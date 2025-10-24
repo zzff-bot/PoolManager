@@ -32,3 +32,22 @@ public class MLevelArgs : MEventArgs
         IsSuccess = isSuccess;
     }
 }
+
+public class MRoundArgs : MEventArgs
+{
+    public int CurRoundIdx;
+    public int TotalRound;
+
+    public MRoundArgs(int curRoundIdx,int totalRound)
+    {
+        CurRoundIdx = curRoundIdx;
+        TotalRound = totalRound;
+    }
+}
+
+public class MSpawnMonsterArgs : MEventArgs
+{
+    public int MonsterID;
+    public MSpawnMonsterArgs() { }
+    public MSpawnMonsterArgs(int monsterId) { this.MonsterID = monsterId; }
+}

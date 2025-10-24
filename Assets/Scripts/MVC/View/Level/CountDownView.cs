@@ -11,9 +11,10 @@ public class CountDownView : View
     private int time = 3;
     private int remainTime = 0;
 
+
     public override void HandleEvent(MEventType eventType, MEventArgs eventArgs)
     {
-        throw new System.NotImplementedException();
+
     }
 
     protected override void Initialize()
@@ -48,7 +49,7 @@ public class CountDownView : View
         //倒计时结束
         SetActive(false);
         //派发倒计时结束的事件
-
+        SendEvent(MEventType.CountDownComplete,null);
     }
 
     private void RefreshNumbers(int remainTime)

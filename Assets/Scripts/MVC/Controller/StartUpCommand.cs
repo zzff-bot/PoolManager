@@ -17,6 +17,7 @@ public class StartUpCommand : Controller
         RegisterController(MEventType.ExitScene, typeof(ExitSceneCommand));
         RegisterController(MEventType.StartLevel, typeof(StartLevelCommand));
         RegisterController(MEventType.EndLevel, typeof(EndLevelCommand));
+        RegisterController(MEventType.CountDownComplete, typeof(CountDownCompleteCommand));
 
         gameModel.Initialize();
     }

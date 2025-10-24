@@ -51,6 +51,7 @@ public class Game : MonoBehaviour
         LoadScene(1);
     }
 
+    //当场景加载完毕调用
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         MSceneArgs args = new MSceneArgs(scene.buildIndex, scene.name);

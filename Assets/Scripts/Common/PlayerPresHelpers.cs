@@ -8,7 +8,7 @@ public class PlayerPresHelpers
 
     //这种存档，是存在手机本地，换设备就会消失
     public static string CurrentLevelKey = "CurrentLevel";
-    public void SaveCurrentLevelIdx(int idx)
+    public static void SetCurrentLevelIdx(int idx)
     {
         PlayerPrefs.SetInt(CurrentLevelKey, idx);
     }

@@ -48,8 +48,7 @@ public class SelectView : View
         //1.读取关卡列表
         LoadLevels();
 
-        //2.读取存档数据，之前通关到哪里
-        curIdx = PlayerPresHelpers.GetCurrentIdx();
+        //2.读取存档数据，之前通关到哪里(代码放至LoadLevels中)
 
         //3.刷新界面
         SetSelectIdx(curIdx);

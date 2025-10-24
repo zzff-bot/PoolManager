@@ -9,4 +9,7 @@ public enum MEventType
     StartUp,
     StartLevel,
     EndLevel,
+    StartRound,
+    SpawnMonster,
+    CountDownComplete,
 }
