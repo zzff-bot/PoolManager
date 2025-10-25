@@ -5,6 +5,8 @@ using UnityEngine;
 public class Spawner : View
 {
     Map map;
+    LuoBo luoBo;
+
     public override MViewName Name => MViewName.Spawner;
 
     public override void HandleEvent(MEventType eventType, MEventArgs eventArgs)
@@ -32,7 +34,8 @@ public class Spawner : View
                 break;
             case MEventType.SpawnMonster:
                 // 4.刷怪
-
+                MSpawnMonsterArgs e = eventArgs as MSpawnMonsterArgs;
+                OnSpawnMonster(e.MonsterID);
                 break;
             default:
                 break;
@@ -43,8 +46,39 @@ public class Spawner : View
     public void OnSpawnLuoBo()
     {
         GameObject objLuoBo = PoolManager.GetInstance().Take("LuoBo");
-        objLuoBo.GetComponent<LuoBo>().Position = map.Path[map.Path.Length - 1];
+        luoBo = objLuoBo.GetComponent<LuoBo>();
+        luoBo.Position = map.Path[map.Path.Length - 1];
+
+        luoBo.HpEvent += OnLuoBoHpEvent;
+        luoBo.DeadEvent += LuoBoDeadEvent;
     }
+
+    //生成怪物
+    void OnSpawnMonster(int monsterId)
+    {
+        GameObject objMonster = PoolManager.GetInstance().Take("Monster" + monsterId);
+        Monster monster = objMonster.GetComponent<Monster>();
+        monster.Load(map.Path);
+
+        monster.ReachedEvent += OnMonsterReached;
+    }
+
+    void OnLuoBoHpEvent(int curHp,int maxHp)
+    {
+
+    }
+
+    void LuoBoDeadEvent(Role role)
+    {
+
+    }
+
+    protected void OnMonsterReached(Monster monsster)
+    {
+        Debug.Log("怪物碰到萝卜");
+    }
+
+    
 
     protected void OnMouseDead(Role role)
     {
