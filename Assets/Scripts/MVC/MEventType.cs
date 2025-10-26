@@ -12,4 +12,5 @@ public enum MEventType
     StartRound,
     SpawnMonster,
     CountDownComplete,
+    MonsterDead,
 }

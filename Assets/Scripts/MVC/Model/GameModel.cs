@@ -17,7 +17,7 @@ public class GameModel : Model
     public List<Level> Levels { get => levels; private set => levels = value; }
     public int CurLevelIdx { get => this.curLevelIdx; }
     public int CurSelectIdx { get => this.curSelectIdx; }
-    public int Gold { get => this.gold; }
+    public int Gold { get => this.gold; set => this.gold = value; }
     public bool IsPlaying { get => this.isPlaying; }
     public bool IsGamePass { get => curLevelIdx >= levels.Count; }
 

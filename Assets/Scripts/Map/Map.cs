@@ -125,7 +125,6 @@ public class Map : MonoBehaviour
 
     public void SetBackground(string fileName)
     {
-        Debug.Log("加载bg");
         //动态加载贴图
         GameObject go = transform.Find("Background").gameObject;   
         if (go == null)
@@ -228,7 +227,6 @@ public class Map : MonoBehaviour
 
     public void LoadLevel(Level level)
     {
-        Debug.Log("Map中的LoadLevel");
         Clear();
         this.level = level;
         this.SetBackground(level.Background);

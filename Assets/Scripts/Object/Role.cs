@@ -18,7 +18,7 @@ public abstract class Role : MonoBehaviour, IReusable
             value = Mathf.Clamp(value, 0, maxHp);
             //刷新
             if (value == this.curHp) return;    //防止无用的执行
-
+            this.curHp = value;
             if (HpEvent != null) HpEvent(this.curHp, this.maxHp);
 
             if(this.curHp <= 0)
@@ -36,7 +36,7 @@ public abstract class Role : MonoBehaviour, IReusable
             this.maxHp = Mathf.Clamp(value, 0, int.MaxValue);
 
             if (value == this.maxHp) return;    //防止无用的执行
-
+            this.maxHp = value;
             if (HpEvent != null) HpEvent(this.curHp, this.maxHp);
         }
     }
@@ -48,7 +48,7 @@ public abstract class Role : MonoBehaviour, IReusable
     public virtual void TakeDamage(int hit)
     {
         if (IsDead) return;
-        this.curHp -= hit;
+        this.CurHp -= hit;
     }
 
     public virtual void OnDead(Role role)

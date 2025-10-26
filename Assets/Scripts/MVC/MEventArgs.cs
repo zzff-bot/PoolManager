@@ -51,3 +51,12 @@ public class MSpawnMonsterArgs : MEventArgs
     public MSpawnMonsterArgs() { }
     public MSpawnMonsterArgs(int monsterId) { this.MonsterID = monsterId; }
 }
+
+public class MMonsterDeadArgs : MEventArgs
+{
+    public Monster Monster;
+    public MMonsterDeadArgs(Monster monster)
+    {
+        Monster = monster;
+    }
+}

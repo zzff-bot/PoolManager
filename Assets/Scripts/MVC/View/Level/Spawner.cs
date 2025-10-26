@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawner : View
 {
+    public const int MonsterDamege = 1;
     Map map;
     LuoBo luoBo;
 
@@ -11,7 +12,6 @@ public class Spawner : View
 
     public override void HandleEvent(MEventType eventType, MEventArgs eventArgs)
     {
-        Debug.Log(eventType);
         switch (eventType)
         {
             case MEventType.EnterScene:
@@ -56,11 +56,12 @@ public class Spawner : View
     //生成怪物
     void OnSpawnMonster(int monsterId)
     {
-        GameObject objMonster = PoolManager.GetInstance().Take("Monster" + monsterId);
+        GameObject objMonster = Game.GetInstance().Pool.Take("Monster" + monsterId);
         Monster monster = objMonster.GetComponent<Monster>();
         monster.Load(map.Path);
 
         monster.ReachedEvent += OnMonsterReached;
+        monster.DeadEvent += OnMonsterDead;
     }
 
     void OnLuoBoHpEvent(int curHp,int maxHp)
@@ -70,21 +71,42 @@ public class Spawner : View
 
     void LuoBoDeadEvent(Role role)
     {
+        //回收
+        Game.GetInstance().Pool.Back(role.gameObject);
 
+        //游戏结束
+        GameModel gm = GetModel<GameModel>(MModelName.GameModel);
+        SendEvent(MEventType.EndLevel, new MLevelArgs(gm.CurSelectIdx, false));
     }
 
-    protected void OnMonsterReached(Monster monsster)
+    protected void OnMonsterReached(Monster monster)
     {
-        Debug.Log("怪物碰到萝卜");
+        //观察者
+        //委托
+        luoBo.TakeDamage(MonsterDamege);
+        monster.CurHp = 0;
     }
 
-    
-
-    protected void OnMouseDead(Role role)
+    void OnMonsterDead(Role monster)
     {
-        //就知道了哪个怪物死了
+        //怪物要回收
+        Game.GetInstance().Pool.Back(monster.gameObject);
 
+        //加分
+        MMonsterDeadArgs args = new MMonsterDeadArgs(monster as Monster);
+        SendEvent(MEventType.MonsterDead, args);
+
+        RoundModel rm = GetModel<RoundModel>(MModelName.RoundModel);
+        GameModel gm = GetModel<GameModel>(MModelName.GameModel);       
+        if (!luoBo.IsDead && rm.IsComplete)
+        {   
+            Monster[] monsters = GameObject.FindObjectsOfType<Monster>();
+            //游戏胜利
+            if (monsters.Length == 0)
+                SendEvent(MEventType.EndLevel, new MLevelArgs(gm.CurSelectIdx, true));
+        }
     }
+
 
     protected override void Awake()
     {

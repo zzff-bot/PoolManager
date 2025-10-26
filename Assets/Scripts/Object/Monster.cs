@@ -19,6 +19,7 @@ public class Monster : Role
     Vector3[] path;     //寻路路径
     int pointIdx = -1;  //当前寻路点下标
     bool isReached = false;     //是否到达
+    int score = 0;
 
     public float MoveSpeed
     {
@@ -30,6 +31,8 @@ public class Monster : Role
     }
 
     public bool IsReached { get { return this.isReached; } }
+
+    public int Score { get { return this.score; } }
 
     public void Load(Vector3[] path)
     {
@@ -103,6 +106,7 @@ public class Monster : Role
         MaxHp = 10;
         CurHp = MaxHp;
         moveSpeed = 3;
+        score = 10;
     }
 
     public override void Back()
@@ -114,5 +118,6 @@ public class Monster : Role
         CurHp = 0;
         this.ReachedEvent = null;
         isReached = false;
+        score = 0;
     }
 }

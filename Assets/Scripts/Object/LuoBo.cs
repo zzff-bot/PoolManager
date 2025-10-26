@@ -16,7 +16,6 @@ public class LuoBo : Role
     public override void OnDead(Role role)
     {
         base.OnDead(role);
-
     }
 
     public override void Take()
@@ -31,6 +30,8 @@ public class LuoBo : Role
     public override void Back()
     {
         base.Back();
-
+        animator = null;
+        this.MaxHp = 0;
+        this.CurHp = 0;
     }
 }
