@@ -55,6 +55,8 @@ public class GameModel : Model
     {
         this.curLevelIdx = selectIdx;
         isPlaying = true;
+
+        this.gold = this.CurLevel.InitScore;
     }
 
     public void EndLevel(bool isSuccess)

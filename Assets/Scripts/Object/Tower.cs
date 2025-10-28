@@ -71,6 +71,7 @@ public abstract class Tower : MonoBehaviour, IReusable
             if (target.IsDead || Vector3.Distance(transform.position, target.Position) > GuardRange)
             {
                 target = null;
+                LookAt(null);
                 return;
             }
 

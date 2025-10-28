@@ -119,6 +119,11 @@ public class Spawner : View
     protected override void Start()
     {
         base.Start();
+
+        GameObject go = Game.GetInstance().Pool.Take("Bottle");
+        Tile tile = map.GetTile(3, 2);
+        go.GetComponent<Tower>().Load(tile);
+        go.transform.position = map.GetPosition(tile);
     }
 
     protected override void OnDestroy()

@@ -137,6 +137,7 @@ public class MenuVIew : View
             case MEventType.StartRound:
                 MRoundArgs e = eventArgs as MRoundArgs;
                 OnRoundInfoUpdate(e.CurRoundIdx, e.TotalRound);
+                this.Score = GetModel<GameModel>(MModelName.GameModel).Gold;
                 break;
             case MEventType.SpawnMonster:
                 break;

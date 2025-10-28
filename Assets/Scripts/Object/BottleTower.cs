@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BottleTower : MonoBehaviour
+public class BottleTower : Tower
 {
-    // Start is called before the first frame update
-    void Start()
+    Transform shotPoint;
+
+    private void Awake()
     {
-        
+        shotPoint = transform.Find("ShotPoint");
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Shot(Monster target)
     {
-        
+        base.Shot(target);
+        //Éú³É×Óµ¯
+        GameObject go = Game.GetInstance().Pool.Take("BottleBullet");
+        BottleBullet bullet = go.GetComponent<Bullet>() as BottleBullet;
+        go.transform.position = shotPoint.position;
+        bullet.Load(1, target);
     }
 }

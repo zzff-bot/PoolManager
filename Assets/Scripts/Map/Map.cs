@@ -97,14 +97,14 @@ public class Map : MonoBehaviour
         }
     }
 
-    Vector3 GetPosition(Tile tile)
+    public Vector3 GetPosition(Tile tile)
     {
         float x = -MapWidth / 2 + (tile.Y + 0.5f) * TileWidth;
         float y = -MapHeight / 2 + (tile.X + 0.5f) * TileHeight;
         return new Vector3(x, y, 0);
     }
 
-    Tile GetTile(Point p)
+    public Tile GetTile(Point p)
     {
         return GetTile(p.X, p.Y);
     }
