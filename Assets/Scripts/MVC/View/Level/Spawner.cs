@@ -56,9 +56,10 @@ public class Spawner : View
     //Éú³É¹ÖÎï
     void OnSpawnMonster(int monsterId)
     {
-        GameObject objMonster = Game.GetInstance().Pool.Take("Monster" + monsterId);
+        MonsterInfo info = Game.GetInstance().StaticData.GetMonsterInfo(monsterId);
+        GameObject objMonster = Game.GetInstance().Pool.Take(info.PrefabName);
         Monster monster = objMonster.GetComponent<Monster>();
-        monster.Load(map.Path);
+        monster.Load(map.Path,info);
 
         monster.ReachedEvent += OnMonsterReached;
         monster.DeadEvent += OnMonsterDead;

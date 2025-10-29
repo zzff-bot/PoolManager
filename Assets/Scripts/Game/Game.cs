@@ -16,6 +16,7 @@ public class Game : MonoBehaviour
     //组合模式
     [HideInInspector] public PoolManager Pool;
     [HideInInspector] public SoundManager Sound;
+    [HideInInspector] public StaticData StaticData;
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class Game : MonoBehaviour
 
         Pool = PoolManager.GetInstance();
         Sound = SoundManager.GetInstance();
+        StaticData = StaticData.GetInstance();
 
         //启动完，跳转至Start场景    EnterScene  ExitScene
         SceneManager.sceneLoaded += OnSceneLoaded;

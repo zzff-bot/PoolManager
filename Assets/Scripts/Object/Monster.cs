@@ -20,6 +20,7 @@ public class Monster : Role
     int pointIdx = -1;  //当前寻路点下标
     bool isReached = false;     //是否到达
     int score = 0;
+    MonsterInfo monsterInfo;
 
     public float MoveSpeed
     {
@@ -34,9 +35,15 @@ public class Monster : Role
 
     public int Score { get { return this.score; } }
 
-    public void Load(Vector3[] path)
+    public void Load(Vector3[] path,MonsterInfo monsterInfo)
     {
         this.path = path;
+        this.monsterInfo = monsterInfo;
+
+        this.moveSpeed = monsterInfo.MoveSpeed;
+        this.score = monsterInfo.Price;
+        this.MaxHp = monsterInfo.Hp;
+        this.CurHp = this.MaxHp;
         MoveNext();
     }
 
