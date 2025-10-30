@@ -60,3 +60,15 @@ public class MMonsterDeadArgs : MEventArgs
         Monster = monster;
     }
 }
+
+public class MSpawnTowerArgs : MEventArgs
+{
+    public int TowerID;
+    public Vector3 Position = Vector3.zero;
+
+    public MSpawnTowerArgs() { }
+
+    public MSpawnTowerArgs(int id) { this.TowerID = id; }
+
+    public MSpawnTowerArgs(int id,Vector3 position) { this.TowerID = id;Position = position; }
+}

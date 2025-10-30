@@ -19,6 +19,7 @@ public class StartUpCommand : Controller
         RegisterController(MEventType.EndLevel, typeof(EndLevelCommand));
         RegisterController(MEventType.CountDownComplete, typeof(CountDownCompleteCommand));
         RegisterController(MEventType.MonsterDead, typeof(MonsterDeadCommand));
+        RegisterController(MEventType.SpawnTower, typeof(SpawnTowerCommand));
 
         gameModel.Initialize();
     }

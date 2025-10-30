@@ -59,7 +59,7 @@ public class StaticData : Singleton<StaticData>
         return Towers[towerID];
     }
 
-    public List<TowerInfo> GetTowerInfo()
+    public List<TowerInfo> GetAllTowerInfo()
     {
         //·µ»ØÒ»¸öList
         return Towers.Values.ToList<TowerInfo>();

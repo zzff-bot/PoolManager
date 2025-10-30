@@ -107,16 +107,17 @@ public abstract class Tower : MonoBehaviour, IReusable
         
     }
 
-    public void Load(Tile tile)
+    public void Load(Tile tile,TowerInfo info)
     {
         this.Tile = tile;
 
         //º”‘ÿ ˝æ›
-        this.shotRate = 5f;
+        this.shotRate = info.ShotRate;
         this.shotInterval = 1 / this.shotRate;
         Level = 1;
-        BasePrice = 5;
-        guardRange = 2;
+        maxLevel = info.MaxLevel;
+        BasePrice = info.BasePrice;
+        guardRange = info.GuardRange;
     }
 
     public void Take()

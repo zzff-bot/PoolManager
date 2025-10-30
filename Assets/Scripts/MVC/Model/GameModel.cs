@@ -51,12 +51,12 @@ public class GameModel : Model
         curLevelIdx = PlayerPresHelpers.GetCurrentIdx();
     }
 
-    public void StartLevel(int selectIdx)
+    public void StartLevel(int selectIdx) 
     {
         this.curLevelIdx = selectIdx;
         isPlaying = true;
 
-        this.gold = this.CurLevel.InitScore;
+        this.gold = 200;// this.CurLevel.InitScore;
     }
 
     public void EndLevel(bool isSuccess)

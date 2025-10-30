@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class Spawner : View
                 // 2.加载地图关卡数据
                 map.LoadLevel(GetModel<GameModel>(MModelName.GameModel).CurLevel);
 
+                map.OnTileClickEvent += OnTileClick;
+
                 // 3.生成萝卜
                 //怎么封装Luobo与 Monster
                 OnSpawnLuoBo();
@@ -37,9 +40,61 @@ public class Spawner : View
                 MSpawnMonsterArgs e = eventArgs as MSpawnMonsterArgs;
                 OnSpawnMonster(e.MonsterID);
                 break;
+            case MEventType.SpawnTower:
+
+                break;
             default:
                 break;
         }
+    }
+
+    void OnTileClick(object sender, EventArgs args)
+    {
+        // 处理点击格子的逻辑
+        GameModel gm = GetModel<GameModel>(MModelName.GameModel);
+        if (!gm.IsPlaying) return;
+
+        PopupView popupView = GetView<PopupView>(MViewName.PopupView);
+        if (popupView.IsShow)
+        {
+            //隐藏菜单
+            popupView.Hide();
+            return;
+        }
+
+        TileClickEventArags eventArgs = args as TileClickEventArags;
+        Debug.Log(args);
+        Debug.Log(eventArgs);
+        if (!eventArgs.Tile.CanHold)
+        {
+            //隐藏菜单
+            popupView.Hide();
+            return;
+        }
+
+        //菜单没显示的状态下点到了一个可以操作的格子
+        if (eventArgs.Tile.data == null){
+            //显示创建菜单
+            popupView.Show(PopoupMenuType.Create, map.GetPosition(eventArgs.Tile));
+        }
+        else
+        {
+            //显示升级菜单
+        }
+
+    }
+
+    public void SpawnerTower(TowerInfo info,Vector3 position)
+    {
+        Tile tile = map.GetTile(position);
+
+        //创建炮塔
+        GameObject go = Game.GetInstance().Pool.Take(info.PrefabName);
+        Tower tower = go.GetComponent<Tower>();
+        tower.transform.position = position;
+        tower.Load(tile,info);
+
+        tile.data = tower;
     }
 
     //生成萝卜
@@ -121,10 +176,10 @@ public class Spawner : View
     {
         base.Start();
 
-        GameObject go = Game.GetInstance().Pool.Take("Bottle");
-        Tile tile = map.GetTile(3, 2);
-        go.GetComponent<Tower>().Load(tile);
-        go.transform.position = map.GetPosition(tile);
+        //GameObject go = Game.GetInstance().Pool.Take("Bottle");
+        //Tile tile = map.GetTile(3, 2);
+        //go.GetComponent<Tower>().Load(tile);
+        //go.transform.position = map.GetPosition(tile);
     }
 
     protected override void OnDestroy()

@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class UpgradePanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameModel gameModel;
+    private PopupView view;
+
+    public void Load(GameModel gameModel, PopupView view)
     {
-        
+        this.gameModel = gameModel;
+        this.view = view;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Show()
     {
-        
+        this.gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        this.gameObject.SetActive(false);
     }
 }

@@ -12,6 +12,7 @@ public enum MViewName
     AccountFailureView,
     SystemView,
     Spawner,
+    PopupView,
 }
 
 //视图层什么时候注册到MVC里面

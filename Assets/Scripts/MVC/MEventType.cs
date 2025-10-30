@@ -13,4 +13,5 @@ public enum MEventType
     SpawnMonster,
     CountDownComplete,
     MonsterDead,
+    SpawnTower,
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 // 鼠标左键：设置寻路点
 // 鼠标右键：设置放置点
@@ -104,6 +105,14 @@ public class Map : MonoBehaviour
         return new Vector3(x, y, 0);
     }
 
+    public Tile GetTile(Vector3 position)
+    {
+        int x = GetRowByPosition(position.y);
+        int y = GetColByPostioin(position.x);
+
+        return GetTile(x, y);
+    }
+
     public Tile GetTile(Point p)
     {
         return GetTile(p.X, p.Y);
@@ -189,6 +198,9 @@ public class Map : MonoBehaviour
 
     private void Update()
     {
+        //如果点到的是UI就是true，则返回
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             TriggerClickTileEvent(0);
@@ -218,11 +230,21 @@ public class Map : MonoBehaviour
         //Camera.main.ScreenToViewportPoint
 
         Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        int row = (int)((worldPoint.y + this.MapHeight / 2) / TileHeight);
-        int col = (int)((worldPoint.x + this.MapWidth / 2) / TileWidth);
+        int row = GetRowByPosition(worldPoint.y);
+        int col = GetColByPostioin(worldPoint.x);
 
         //转换成行列数
         return GetTile(row, col);
+    }
+
+    int GetColByPostioin(float x)
+    {
+        return (int)((x + this.MapWidth / 2) / TileWidth);
+    }
+
+    int GetRowByPosition(float y)
+    {
+        return (int)((y + this.MapHeight / 2) / TileHeight);
     }
 
     public void LoadLevel(Level level)

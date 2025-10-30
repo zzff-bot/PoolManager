@@ -9,28 +9,42 @@ public class CreateIcon : MonoBehaviour
     Image image;
     TowerInfo info;
     bool isEnough;
+    GameModel gameModel;
+    PopupView view;
 
-    private void Start()
+    private void Awake()
     {
         image = GetComponent<Image>();
         GetComponent<Button>().onClick.AddListener(OnClick);
     }
 
-    public void Load(TowerInfo info,GameModel gameModel)
+    public void Load(TowerInfo info,GameModel gameModel, PopupView view)
     {
         this.info = info;
-        isEnough = gameModel.Gold >= info.BasePrice;
+        this.gameModel = gameModel;
+        this.view = view;
 
+        CheckIsEnough();
+    }
+
+    public void CheckIsEnough()
+    {
+        isEnough = gameModel.Gold >= info.BasePrice;
         //路径    Pictures/NormalMordel/Game/
-        string path = "Pictures/NormalMordel/Game/" + (isEnough ? info.NormalIcon : info.DisabledIcon);     //判断哪个成立拿哪个
+        string path = "Pictures/NormalMordel/Game/Tower/" + (isEnough ? info.NormalIcon : info.DisabledIcon);     //判断哪个成立拿哪个
         image.sprite = Resources.Load<Sprite>(path);
     }
 
     void OnClick()
     {
-        if (!isEnough)
+        if (isEnough)
         {
-            Debug.Log("生成炮塔");
+            MSpawnTowerArgs e = new MSpawnTowerArgs();
+            e.TowerID = info.ID;
+            e.Position = this.view.Point;
+            this.view.MySendEvent(MEventType.SpawnTower, e);
         }
+
+        this.view.HideAllPanel();
     }
 }

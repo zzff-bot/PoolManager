@@ -65,7 +65,7 @@ public class RoundModel : Model
                 //À¢π÷
                 MSpawnMonsterArgs argsMonster = new MSpawnMonsterArgs(CurRound.MonsterId);
                 SendEvent(MEventType.SpawnMonster, argsMonster);
-                Debug.Log("À¢π÷");
+                //Debug.Log("À¢π÷");
 
                 // «∑ÒÀ¢ÕÍ¡À
                 if(i == RoundCount - 1 && j == CurRound.Count - 1)
