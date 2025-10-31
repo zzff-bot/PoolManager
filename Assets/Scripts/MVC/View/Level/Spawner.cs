@@ -63,8 +63,6 @@ public class Spawner : View
         }
 
         TileClickEventArags eventArgs = args as TileClickEventArags;
-        Debug.Log(args);
-        Debug.Log(eventArgs);
         if (!eventArgs.Tile.CanHold)
         {
             //隐藏菜单
@@ -80,6 +78,7 @@ public class Spawner : View
         else
         {
             //显示升级菜单
+            popupView.Show(PopoupMenuType.Upgrade, map.GetPosition(eventArgs.Tile), eventArgs.Tile.data as Tower);
         }
 
     }
@@ -148,8 +147,10 @@ public class Spawner : View
         //怪物要回收
         Game.GetInstance().Pool.Back(monster.gameObject);
 
+        Monster temp = monster as Monster;
+
         //加分
-        MMonsterDeadArgs args = new MMonsterDeadArgs(monster as Monster);
+        MMonsterDeadArgs args = new MMonsterDeadArgs(temp);
         SendEvent(MEventType.MonsterDead, args);
 
         RoundModel rm = GetModel<RoundModel>(MModelName.RoundModel);
@@ -161,6 +162,8 @@ public class Spawner : View
             if (monsters.Length == 0)
                 SendEvent(MEventType.EndLevel, new MLevelArgs(gm.CurSelectIdx, true));
         }
+
+        gm.Gold += temp.Price;
     }
 
 

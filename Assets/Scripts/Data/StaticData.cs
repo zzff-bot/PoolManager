@@ -25,7 +25,7 @@ public class StaticData : Singleton<StaticData>
 
     void InitMonster()
     {
-        Monsters.Add(0, new MonsterInfo() { ID = 0, Hp = 5, MoveSpeed = 1f, Price = 1,PrefabName = "Monster0" });
+        Monsters.Add(0, new MonsterInfo() { ID = 0, Hp = 2, MoveSpeed = 1f, Price = 50,PrefabName = "Monster0" });
         Monsters.Add(1, new MonsterInfo() { ID = 1, Hp = 5, MoveSpeed = 1f, Price = 2});
     }
 
@@ -36,7 +36,7 @@ public class StaticData : Singleton<StaticData>
 
     void InitTowers()
     {
-        Towers.Add(0, new TowerInfo() { ID = 0, PrefabName = "Bottle", NormalIcon = "1/CanClick1", DisabledIcon = "1/CanClick0", MaxLevel = 3, BasePrice = 100, ShotRate = 2, GuardRange = 3f, UseBulletID = 0 }); 
+        Towers.Add(0, new TowerInfo() { ID = 0, PrefabName = "Bottle", NormalIcon = "1/CanClick1", DisabledIcon = "1/CanClick0", MaxLevel = 3, BasePrice = 100, ShotRate = 3, GuardRange = 3f, UseBulletID = 0 }); 
     }
 
     public LuoBoInfo GetLuoboInfo()

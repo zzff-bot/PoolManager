@@ -39,7 +39,6 @@ public class PopupView : View
         createPanel.Load(gm,this);
 
         upgradePanel = GetComponentInChildren<UpgradePanel>();
-        upgradePanel.Load(gm,this);
 
         tfRoot = transform.Find("Root");
 
@@ -57,7 +56,7 @@ public class PopupView : View
         HideAllPanel();
     }
 
-    public void Show(PopoupMenuType type,Vector3 wolrdPoint)
+    public void Show(PopoupMenuType type,Vector3 wolrdPoint, Tower tower = null)
     {
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(wolrdPoint);
         tfRoot.position = screenPosition;
@@ -68,6 +67,8 @@ public class PopupView : View
                 ShowCreatePanel();
                 break;
             case PopoupMenuType.Upgrade:
+                upgradePanel.Load(GetModel<GameModel>(MModelName.GameModel), this, tower);
+                ShowUpgradePanel();
                 break;
             default:
                 break;

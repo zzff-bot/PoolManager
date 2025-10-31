@@ -8,12 +8,17 @@ public class AccountSuccessView : View
 
     public override void HandleEvent(MEventType eventType, MEventArgs eventArgs)
     {
-        throw new System.NotImplementedException();
+
     }
 
     protected override void Start()
     {
         base.Start();
         SetActive(false);
+    }
+
+    public void Show()
+    {
+        this.gameObject.SetActive(true);
     }
 }

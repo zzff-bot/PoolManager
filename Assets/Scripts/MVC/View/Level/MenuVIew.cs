@@ -50,6 +50,7 @@ public class MenuVIew : View
         base.Start();
 
         RegisterEvent(MEventType.StartRound);
+        RegisterEvent(MEventType.GoldChange);
 
         this.Score = 0;
         this.IsPlaying = true;
@@ -142,6 +143,10 @@ public class MenuVIew : View
             case MEventType.SpawnMonster:
                 break;
             case MEventType.CountDownComplete:
+                break;
+            case MEventType.GoldChange:
+                MIntArgs e1 = eventArgs as MIntArgs;
+                this.Score = e1.value;
                 break;
             default:
                 break;

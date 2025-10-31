@@ -7,6 +7,16 @@ public class MEventArgs
     
 }
 
+public class MIntArgs : MEventArgs
+{
+    public int value;
+
+    public MIntArgs(int mValue)
+    {
+        value = mValue;
+    }
+}
+
 public class MSceneArgs : MEventArgs
 {
     public int sceneIdx;
@@ -71,4 +81,14 @@ public class MSpawnTowerArgs : MEventArgs
     public MSpawnTowerArgs(int id) { this.TowerID = id; }
 
     public MSpawnTowerArgs(int id,Vector3 position) { this.TowerID = id;Position = position; }
+}
+
+public class MSellTowerArgs : MEventArgs
+{
+    public Tower Tower;
+
+    public MSellTowerArgs(Tower tower)
+    {
+        this.Tower = tower;
+    }
 }

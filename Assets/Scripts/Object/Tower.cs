@@ -18,13 +18,12 @@ public abstract class Tower : MonoBehaviour, IReusable
         get { return this.level; }
         set
         {
-            value = Mathf.Clamp(value, 0, maxLevel);
-            this.level = value;
+            this.level = Mathf.Clamp(value, 0, maxLevel);
             transform.localScale = Vector3.one * (1 + this.level * 0.3f);
         }
     }
 
-    public int MaxLevel { get; }
+    public int MaxLevel { get { return this.maxLevel; } }
 
     public bool IsTopLevel { get { return level >= maxLevel; } }
 
@@ -37,6 +36,8 @@ public abstract class Tower : MonoBehaviour, IReusable
 
     //升级价格
     public int Price { get { return BasePrice * level; } }
+
+    public int SellPrice { get { return (int)(Price * 0.8f); } }
 
     public Tile Tile { get; private set; }
 
@@ -114,8 +115,8 @@ public abstract class Tower : MonoBehaviour, IReusable
         //加载数据
         this.shotRate = info.ShotRate;
         this.shotInterval = 1 / this.shotRate;
+        this.maxLevel = info.MaxLevel;
         Level = 1;
-        maxLevel = info.MaxLevel;
         BasePrice = info.BasePrice;
         guardRange = info.GuardRange;
     }

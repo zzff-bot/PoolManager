@@ -14,4 +14,6 @@ public enum MEventType
     CountDownComplete,
     MonsterDead,
     SpawnTower,
+    SellTower,
+    GoldChange,
 }

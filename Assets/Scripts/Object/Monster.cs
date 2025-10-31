@@ -31,6 +31,8 @@ public class Monster : Role
         }
     }
 
+    public int Price { get; set; }
+
     public bool IsReached { get { return this.isReached; } }
 
     public int Score { get { return this.score; } }
@@ -44,6 +46,7 @@ public class Monster : Role
         this.score = monsterInfo.Price;
         this.MaxHp = monsterInfo.Hp;
         this.CurHp = this.MaxHp;
+        this.Price = monsterInfo.Price;
         MoveNext();
     }
 

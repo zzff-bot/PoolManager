@@ -16,4 +16,9 @@ public class AccountFailureView : View
         base.Start();
         SetActive(false);
     }
+
+    public void Show()
+    {
+        this.gameObject.SetActive(true);
+    }
 }
