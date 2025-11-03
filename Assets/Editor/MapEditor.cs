@@ -64,6 +64,8 @@ public class MapEditor : Editor
     int roundCount = 0;
     List<int> MonsterIdList = new List<int>();
     List<int> MonsterCountList = new List<int>();
+
+    //新建关卡内容
     private void OnCreateMode()
     {
         if(levelFiles == null)
@@ -90,8 +92,8 @@ public class MapEditor : Editor
         EditorGUILayout.PropertyField(CardImage);       //显示编辑属性框
         serializedObject.ApplyModifiedProperties();     //允许编辑属性
 
-        //获取当前绑定的图片
-        Texture2D curCardImage = CardImage.objectReferenceValue as Texture2D;
+        ////获取当前绑定的图片
+        //Texture2D curCardImage = CardImage.objectReferenceValue as Texture2D;
         
         EditorGUILayout.PropertyField(Background);
         serializedObject.ApplyModifiedProperties();
@@ -132,6 +134,7 @@ public class MapEditor : Editor
             }
         }
 
+        //点击后，加载保存关卡相关数据
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("新建关卡"))
         {
@@ -163,12 +166,15 @@ public class MapEditor : Editor
                 }
             }
 
+            //存储在xml文件中
             string path = Const.LevelConfigPath + newLevelFileName;
+            //先查找是否已经存在相关的关卡名
             if (File.Exists(path))
             {
                 EditorUtility.DisplayDialog("新建错误", "关卡文件已存在", "确定");
                 return;
             }
+            //若是没有存在，则成功创建
             Utils.SaveLevel(path, level);
             EditorUtility.DisplayDialog("新建成功", "新建关卡成功", "确定");
 
@@ -215,9 +221,88 @@ public class MapEditor : Editor
         }
         EditorGUILayout.EndHorizontal();
 
+        //自己新增内容
+        //1.修改关卡背景图
+        //增加选择框
+        EditorGUILayout.PropertyField(CardImage);       //显示编辑属性框
+        serializedObject.ApplyModifiedProperties();     //允许编辑属性
+
+        EditorGUILayout.PropertyField(Background);
+        serializedObject.ApplyModifiedProperties();
+
+        EditorGUILayout.PropertyField(TempRoad);
+        serializedObject.ApplyModifiedProperties();
+
+        //2.分数
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label("初始分数:");
+        initScore = GUILayout.TextField(initScore);
+        EditorGUILayout.EndHorizontal();
+
+        //3.回合信息
+        EditorGUILayout.BeginHorizontal();
+
+        GUILayout.Label("回合信息");
+        GUILayout.Label("怪物总波数");
+
+        EditorGUILayout.EndHorizontal();
+
+        int newRoundCount = EditorGUILayout.IntField(roundCount);
+
+        if (newRoundCount != roundCount)
+        {
+            for (int i = roundCount; i < newRoundCount; i++)
+            {
+                MonsterIdList.Add(0);
+                MonsterCountList.Add(0);
+            }
+        }
+        else
+        {
+            for (int i = roundCount - 1; i >= newRoundCount; i--)
+            {
+                MonsterIdList.Remove(i);
+                MonsterCountList.Remove(i);
+            }
+
+            roundCount = newRoundCount;
+        }
+
+        if (roundCount > 0)
+        {
+            for (int i = 0; i < roundCount; i++)
+            {
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Label("怪物ID");
+                MonsterIdList[i] = EditorGUILayout.IntField(MonsterIdList[i]);
+
+                GUILayout.Label("怪物数量");
+                MonsterCountList[i] = EditorGUILayout.IntField(MonsterCountList[i]);
+                EditorGUILayout.EndHorizontal();
+            }
+        }
+
         if (GUILayout.Button("保存关卡"))
         {
-            SvaeLevel();
+            //编辑分数检测
+            if (!int.TryParse(initScore, out level.InitScore))
+            {
+                EditorUtility.DisplayDialog("保存错误", "初始分数输入不合法,设置失败", "确定");
+                return;
+            }
+
+            //从level文件中同步数据到编辑器中
+            if (CardImage.objectReferenceValue != null)
+                level.CardImage = (CardImage.objectReferenceValue as Texture2D).name + ".png";
+
+            if (Background.objectReferenceValue != null)
+                level.Background = (Background.objectReferenceValue as Texture2D).name + ".png";
+
+            if (TempRoad.objectReferenceValue != null)
+                level.Road = (TempRoad.objectReferenceValue as Texture2D).name + ".png";
+
+            SaveLevel();
+
         }
     }
 
@@ -231,12 +316,38 @@ public class MapEditor : Editor
         level = new Level();
         Utils.LoadLevel(fileName, ref level);
 
+        //加载已经设定好的关卡分数和怪物回合数
+        initScore = level.InitScore.ToString();
+        roundCount = level.Rounds.Count;
+
+        //将已有的回合信息添加至列表中，在编辑关卡中显示
+        //Debug.Log(level.Rounds.Count);
+        //先清空，再添加
+        MonsterCountList.Clear();
+        MonsterIdList.Clear();
+
+        for (int i = 0; i < roundCount; i++)
+        {
+            MonsterIdList.Add(0);
+            MonsterCountList.Add(0);
+        }
+
+        for(int i = 0; i < level.Rounds.Count; i++)
+        {
+            Round r = level.Rounds[i];
+            MonsterIdList[i] = r.MonsterId;
+            MonsterCountList[i] = r.Count;
+        }
+        //MonsterIdList = level.Rounds
+        
+
         //设置给Map对象的LoadLevel()函数去生成游戏信息
         //这个对象需要在游戏运行中才存在
         map.LoadLevel(level);
+
     }
 
-    private void SvaeLevel()
+    private void SaveLevel()
     {
         // 保存数据
         //level

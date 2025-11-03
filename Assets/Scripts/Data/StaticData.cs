@@ -26,7 +26,10 @@ public class StaticData : Singleton<StaticData>
     void InitMonster()
     {
         Monsters.Add(0, new MonsterInfo() { ID = 0, Hp = 2, MoveSpeed = 1f, Price = 50,PrefabName = "Monster0" });
-        Monsters.Add(1, new MonsterInfo() { ID = 1, Hp = 5, MoveSpeed = 1f, Price = 2});
+        Monsters.Add(1, new MonsterInfo() { ID = 1, Hp = 3, MoveSpeed = 1f, Price = 60,PrefabName = "Monster1" });
+        Monsters.Add(2, new MonsterInfo() { ID = 2, Hp = 3, MoveSpeed = 1f, Price = 80,PrefabName = "Monster2" });
+        Monsters.Add(3, new MonsterInfo() { ID = 3, Hp = 3, MoveSpeed = 1f, Price = 90,PrefabName = "Monster3" });
+        Monsters.Add(4, new MonsterInfo() { ID = 4, Hp = 3, MoveSpeed = 1f, Price = 100,PrefabName = "Monster4" });
     }
 
     void InitLuoBo()

@@ -22,7 +22,7 @@ public class RoundModel : Model
 
     public bool IsComplete { get => this.isComplete; }
 
-    public Round CurRound { get => rounds[curRoundIdx]; }
+    public Round CurRound { get => rounds[CurRoundIdx]; }
 
     public void LoadLevel(Level level)
     {

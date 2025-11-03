@@ -1,31 +1,39 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Level>
-	<Name>第一关：敌人来袭</Name>
-	<CardImage>1Level_1.png</CardImage>
-	<Background>Bg1.1.png</Background>
-	<Road>Road1.1.png</Road>
-	<InitScore>200</InitScore>
+	<Name>第三关</Name>
+	<CardImage>2Level_3.png</CardImage>
+	<Background>BG2.0.png</Background>
+	<Road>Road2.2.png</Road>
+	<InitScore>400</InitScore>
 	<Holder>
+		<Point X = "0" Y = "0" />
+		<Point X = "0" Y = "1" />
+		<Point X = "0" Y = "2" />
+		<Point X = "0" Y = "3" />
+		<Point X = "0" Y = "4" />
+		<Point X = "0" Y = "5" />
+		<Point X = "0" Y = "6" />
+		<Point X = "0" Y = "7" />
+		<Point X = "0" Y = "8" />
+		<Point X = "0" Y = "9" />
+		<Point X = "0" Y = "10" />
+		<Point X = "0" Y = "11" />
 		<Point X = "1" Y = "0" />
-		<Point X = "1" Y = "1" />
-		<Point X = "1" Y = "2" />
-		<Point X = "1" Y = "3" />
-		<Point X = "1" Y = "4" />
 		<Point X = "1" Y = "5" />
 		<Point X = "1" Y = "6" />
 		<Point X = "1" Y = "7" />
-		<Point X = "1" Y = "8" />
-		<Point X = "1" Y = "9" />
-		<Point X = "1" Y = "10" />
 		<Point X = "1" Y = "11" />
 		<Point X = "2" Y = "0" />
+		<Point X = "2" Y = "2" />
+		<Point X = "2" Y = "3" />
 		<Point X = "2" Y = "5" />
 		<Point X = "2" Y = "6" />
+		<Point X = "2" Y = "7" />
+		<Point X = "2" Y = "9" />
 		<Point X = "2" Y = "11" />
 		<Point X = "3" Y = "0" />
 		<Point X = "3" Y = "2" />
 		<Point X = "3" Y = "3" />
-		<Point X = "3" Y = "8" />
 		<Point X = "3" Y = "9" />
 		<Point X = "3" Y = "11" />
 		<Point X = "4" Y = "0" />
@@ -40,27 +48,33 @@
 		<Point X = "4" Y = "11" />
 		<Point X = "5" Y = "0" />
 		<Point X = "5" Y = "2" />
-		<Point X = "5" Y = "9" />
+		<Point X = "5" Y = "3" />
 		<Point X = "5" Y = "11" />
 		<Point X = "6" Y = "0" />
 		<Point X = "6" Y = "1" />
 		<Point X = "6" Y = "2" />
+		<Point X = "6" Y = "3" />
+		<Point X = "6" Y = "4" />
+		<Point X = "6" Y = "5" />
+		<Point X = "6" Y = "6" />
+		<Point X = "6" Y = "7" />
+		<Point X = "6" Y = "8" />
 		<Point X = "6" Y = "9" />
 		<Point X = "6" Y = "10" />
 		<Point X = "6" Y = "11" />
 	</Holder>
 	<Path>
 		<Point X = "5" Y = "1" />
-		<Point X = "2" Y = "1" />
-		<Point X = "2" Y = "4" />
+		<Point X = "1" Y = "1" />
+		<Point X = "1" Y = "4" />
 		<Point X = "3" Y = "4" />
-		<Point X = "3" Y = "7" />
-		<Point X = "2" Y = "7" />
-		<Point X = "2" Y = "10" />
+		<Point X = "3" Y = "8" />
+		<Point X = "1" Y = "8" />
+		<Point X = "1" Y = "10" />
 		<Point X = "5" Y = "10" />
+		<Point X = "5" Y = "4" />
 	</Path>
 	<Rounds>
-		<Round Monster="0" Count="5" />
-		<Round Monster="1" Count="5" />
+		<Round Monster="3" Count="10" />
 	</Rounds>
 </Level>

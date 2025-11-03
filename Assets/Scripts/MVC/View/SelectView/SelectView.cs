@@ -109,6 +109,7 @@ public class SelectView : View
         //点击开始游戏，   当前关卡下标
         //发送事件
         MLevelArgs args = new MLevelArgs(this.selectIdx, false);
+        Debug.Log(this.selectIdx);
         SendEvent(MEventType.StartLevel, args);        
     }
 

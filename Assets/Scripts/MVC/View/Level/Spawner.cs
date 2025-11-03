@@ -139,7 +139,13 @@ public class Spawner : View
         //观察者
         //委托
         luoBo.TakeDamage(MonsterDamege);
-        monster.CurHp = 0;
+        //monster.CurHp = 0;
+
+        //怪物若是到达，没有死亡，则不加金钱，直接回收，萝卜扣血
+        monster.ReachedEvent -= OnMonsterReached;
+        monster.DeadEvent -= OnMonsterDead;
+
+        Game.GetInstance().Pool.Back(monster.gameObject);
     }
 
     void OnMonsterDead(Role monster)
