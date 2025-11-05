@@ -125,7 +125,7 @@ public class MenuVIew : View
         switch (eventType)
         {
             case MEventType.EnterScene:
-                Debug.Log("MenuView中的EnterScence");
+                //Debug.Log("MenuView中的EnterScence");
                 break;
             case MEventType.ExitScene:
                 break;
@@ -162,21 +162,25 @@ public class MenuVIew : View
     private void OnOneClick()
     {
         this.PlaySpeed = GameSpeed.Two;
+        Time.timeScale = (float)GameSpeed.Two;
     }
 
     private void OnTwoClick()
     {
         this.PlaySpeed = GameSpeed.One;
+        Time.timeScale = (float)GameSpeed.One;
     }
 
     private void OnResumeClick()
     {
         this.IsPlaying = true;
+        Time.timeScale = 1;
     }
 
     private void OnPauseClick()
     {
         this.IsPlaying = false;
+        Time.timeScale = 0;
     }
 
     private void OnSystemClick()

@@ -23,7 +23,7 @@ public class LuoBo : Role
         base.Take();
         animator = transform.GetComponent<Animator>();
 
-        this.MaxHp = 10;
+        this.MaxHp = 7;
         this.CurHp = this.MaxHp;
     }
 

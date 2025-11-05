@@ -47,3 +47,6 @@ TagManager:
   - name: LuoBo
     uniqueID: 551593113
     locked: 0
+  - name: FlashBullet
+    uniqueID: 3406929801
+    locked: 0

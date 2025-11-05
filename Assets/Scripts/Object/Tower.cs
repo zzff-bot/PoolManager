@@ -87,7 +87,7 @@ public abstract class Tower : MonoBehaviour, IReusable
         }
     }
 
-    void LookAt(Monster target)
+    public virtual void LookAt(Monster target)
     {
         if (target == null)
         {
