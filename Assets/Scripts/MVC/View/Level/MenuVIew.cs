@@ -77,6 +77,12 @@ public class MenuVIew : View
             this.playspeed = value;
             this.objBtnOne.SetActive(this.playspeed == GameSpeed.One);
             this.objBtnTwo.SetActive(this.playspeed == GameSpeed.Two);
+
+            //新增
+            if (this.IsPlaying)
+            {
+                Time.timeScale = (float)this.playspeed;
+            }
         }
     }
 
@@ -88,11 +94,22 @@ public class MenuVIew : View
             this.isPlaying = value;
             this.objBtnResume.SetActive(!this.isPlaying);
             this.objBtnPause.SetActive(this.isPlaying);
+
+            // 关键：同步状态到 GameModel（M层统一管理）
+            GameModel gameModel = GetModel<GameModel>(MModelName.GameModel);
+            if (gameModel != null)
+            {
+                gameModel.SetIsPlaying(value);
+            }
+
+            // 时间缩放逻辑（修复恢复时的速度问题）(还是存在问题)
+            Time.timeScale = this.isPlaying ? (float)this.playspeed : 0f;
         }
     }
 
     protected override void Initialize()
-    {
+    {        
+
         base.Initialize();
         //先锁定父物体再确认
         Transform tfBackground = transform.Find("Background");
@@ -138,7 +155,7 @@ public class MenuVIew : View
             case MEventType.StartRound:
                 MRoundArgs e = eventArgs as MRoundArgs;
                 OnRoundInfoUpdate(e.CurRoundIdx, e.TotalRound);
-                this.Score = GetModel<GameModel>(MModelName.GameModel).Gold;
+                this.Score = GetModel<GameModel>(MModelName.GameModel).Gold;                
                 break;
             case MEventType.SpawnMonster:
                 break;
@@ -168,25 +185,27 @@ public class MenuVIew : View
     private void OnTwoClick()
     {
         this.PlaySpeed = GameSpeed.One;
-        Time.timeScale = (float)GameSpeed.One;
+        //Time.timeScale = (float)GameSpeed.One;
     }
 
     private void OnResumeClick()
     {
         this.IsPlaying = true;
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
     }
 
     private void OnPauseClick()
     {
         this.IsPlaying = false;
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     private void OnSystemClick()
     {
         //GetView()
         View systemView = GetView<SystemView>(MViewName.SystemView);
+        this.IsPlaying = false;
+        //Time.timeScale = 0;
         systemView.SetActive(true);
     }
 

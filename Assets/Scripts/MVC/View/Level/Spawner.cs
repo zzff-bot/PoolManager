@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Spawner : View
 {
+    MenuVIew view;
+
     public const int MonsterDamege = 1;
     Map map;
     LuoBo luoBo;
@@ -46,6 +48,13 @@ public class Spawner : View
             default:
                 break;
         }
+    }
+
+    protected override void Initialize()
+    {
+        base.Initialize();
+
+        view = GetView<MenuVIew>(MViewName.MenuVIew);
     }
 
     void OnTileClick(object sender, EventArgs args)

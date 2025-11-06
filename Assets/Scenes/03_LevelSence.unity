@@ -248,6 +248,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attentionEvents: 
+  objBtnRestart: {fileID: 0}
+  objBtnContinue: {fileID: 0}
+  txtCurRound: {fileID: 0}
+  txtTotalRound: {fileID: 0}
 --- !u!1 &32144758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1923,6 +1927,8 @@ MonoBehaviour:
   attentionEvents: 
   objBtnRestart: {fileID: 0}
   objBtnContinue: {fileID: 0}
+  txtCurRound: {fileID: 0}
+  txtTotalRound: {fileID: 0}
 --- !u!1 &760999753
 GameObject:
   m_ObjectHideFlags: 0
@@ -2695,7 +2701,7 @@ GameObject:
   - component: {fileID: 1080697172}
   - component: {fileID: 1080697171}
   m_Layer: 5
-  m_Name: Backgound
+  m_Name: BackgoundS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class RoundModel : Model
 {
     public override MModelName Name => MModelName.RoundModel;
+    
 
     //数据与数据逻辑
     public const float ROUND_INTERVAL = 3F; //回合间隔时间
@@ -32,7 +33,7 @@ public class RoundModel : Model
     //数据逻辑
     public void StartRound()
     {
-        runner = Game.GetInstance().StartCoroutine(RunRound());        
+        runner = Game.GetInstance().StartCoroutine(RunRound());                
     }
 
     public void StopRound()
@@ -44,7 +45,7 @@ public class RoundModel : Model
         }
     }
 
-    IEnumerator RunRound()
+    public IEnumerator RunRound()
     {
 
         curRoundIdx = -1;

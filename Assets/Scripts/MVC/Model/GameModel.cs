@@ -85,5 +85,10 @@ public class GameModel : Model
         curSelectIdx = -1;
         PlayerPresHelpers.SetCurrentLevelIdx(0);
     }
+
+    public void SetIsPlaying(bool value)
+    {
+        this.isPlaying = value;
+    }
 }
         
